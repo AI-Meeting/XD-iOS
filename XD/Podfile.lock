@@ -1,0 +1,68 @@
+PODS:
+  - Alamofire (5.5.0)
+  - DropDown (2.3.13)
+  - FloatingPanel (2.5.1)
+  - KeychainSwift (20.0.0)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - R.swift (6.1.0):
+    - R.swift.Library (~> 5.3.0)
+  - R.swift.Library (5.3.0)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+  - SnapKit (5.0.1)
+  - SwiftLint (0.46.2)
+  - Then (2.7.0)
+
+DEPENDENCIES:
+  - DropDown
+  - FloatingPanel
+  - KeychainSwift
+  - Moya
+  - R.swift
+  - RxCocoa
+  - RxSwift
+  - SnapKit
+  - SwiftLint
+  - Then
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - DropDown
+    - FloatingPanel
+    - KeychainSwift
+    - Moya
+    - R.swift
+    - R.swift.Library
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+    - SnapKit
+    - SwiftLint
+    - Then
+
+SPEC CHECKSUMS:
+  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  FloatingPanel: 523cb50f490f151fc03fabf24a8322e44d22f65f
+  KeychainSwift: 0ce6a4d13f7228054d1a71bb1b500448fb2ab837
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  R.swift: ec98ff71c4ab2f6fd01dd077e5afd15e63a4834c
+  R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftLint: 6bc52a21f0fd44cab9aa2dc8e534fb9f5e3ec507
+  Then: acfe0be7e98221c6204e12f8161459606d5d822d
+
+PODFILE CHECKSUM: 1f8077841945bfca39525ff9a419ba92922e3baa
+
+COCOAPODS: 1.11.2
