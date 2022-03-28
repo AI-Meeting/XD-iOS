@@ -20,6 +20,11 @@ class LogInViewController: UIViewController {
         $0.text = "면접을 쉽고 간편하게, \n당신만을 위한 XD"
         $0.numberOfLines = 0
         $0.font = .boldSystemFont(ofSize: 24)
+        let attrString = NSMutableAttributedString(string: $0.text!)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 7
+        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attrString.length))
+        $0.attributedText = attrString
     }
     
     private let idLabel = UILabel().then {
