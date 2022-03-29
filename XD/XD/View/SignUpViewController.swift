@@ -73,14 +73,15 @@ class SignUpViewController: UIViewController {
         $0.textColor = R.color.textColor2()
     }
     
-    private let signUpButton = UIButton().then {
+    private let signUpButton = UIButton(type: .system).then {
         $0.backgroundColor = R.color.mainColor()
         $0.setTitle("회원가입", for: .normal)
         $0.titleLabel?.font = .boldSystemFont(ofSize: 14)
+        $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 5
     }
     
-    private let pushToLogInButton = UIButton().then {
+    private let pushToLogInButton = UIButton(type: .system).then {
         $0.setTitle("로그인하러 가기", for: .normal)
         $0.setTitleColor(R.color.textColor2(), for: .normal)
         $0.titleLabel?.font = .boldSystemFont(ofSize: 12)
@@ -96,12 +97,16 @@ class SignUpViewController: UIViewController {
         [nameTextField, idTextField, pwTextField, schoolTextField].forEach({$0.underLine()})
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     private func setUpSubView() {
         [logo, titleLabel, nameLabel, nameTextField, idLabel, idTextField, pwLabel, pwTextField, schoolLabel, schoolTextField, signUpButton, pushToLogInButton].forEach({self.view.addSubview($0)})
         
         logo.snp.makeConstraints {
             $0.top.equalTo(143)
-            $0.leading.equalTo(64)
+            $0.leading.equalTo(55)
             $0.width.equalTo(30)
             $0.height.equalTo(30)
         }
@@ -113,54 +118,50 @@ class SignUpViewController: UIViewController {
         
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(42)
-            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.leading.equalTo(nameTextField.snp.leading)
         }
         
         nameTextField.snp.makeConstraints {
             $0.top.equalTo(nameLabel.snp.bottom).offset(10)
-            $0.leading.equalTo(titleLabel.snp.leading)
-            $0.width.equalTo(220)
+            $0.width.equalTo(240)
             $0.centerX.equalToSuperview()
         }
         
         idLabel.snp.makeConstraints {
             $0.top.equalTo(nameTextField.snp.bottom).offset(30)
-            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.leading.equalTo(idTextField.snp.leading)
         }
         
         idTextField.snp.makeConstraints {
             $0.top.equalTo(idLabel.snp.bottom).offset(10)
-            $0.leading.equalTo(titleLabel.snp.leading)
-            $0.width.equalTo(220)
+            $0.width.equalTo(240)
             $0.centerX.equalToSuperview()
         }
         
         pwLabel.snp.makeConstraints {
             $0.top.equalTo(idTextField.snp.bottom).offset(30)
-            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.leading.equalTo(pwTextField.snp.leading)
         }
         
         pwTextField.snp.makeConstraints {
             $0.top.equalTo(pwLabel.snp.bottom).offset(10)
-            $0.leading.equalTo(titleLabel.snp.leading)
-            $0.width.equalTo(220)
+            $0.width.equalTo(240)
             $0.centerX.equalToSuperview()
         }
         
         schoolLabel.snp.makeConstraints {
             $0.top.equalTo(pwTextField.snp.bottom).offset(30)
-            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.leading.equalTo(schoolTextField.snp.leading)
         }
         
         schoolTextField.snp.makeConstraints {
             $0.top.equalTo(schoolLabel.snp.bottom).offset(10)
-            $0.leading.equalTo(titleLabel.snp.leading)
-            $0.width.equalTo(220)
+            $0.width.equalTo(240)
             $0.centerX.equalToSuperview()
         }
         
         signUpButton.snp.makeConstraints {
-            $0.width.equalTo(220)
+            $0.width.equalTo(240)
             $0.height.equalTo(45)
             $0.centerX.equalToSuperview()
             $0.top.equalTo(schoolTextField.snp.bottom).offset(30)

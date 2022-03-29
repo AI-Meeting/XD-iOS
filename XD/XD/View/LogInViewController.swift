@@ -11,7 +11,7 @@ import Then
 import Rswift
 
 class LogInViewController: UIViewController {
-
+    
     private let logo = UIImageView().then {
         $0.image = R.image.logo()
     }
@@ -52,16 +52,22 @@ class LogInViewController: UIViewController {
         $0.isSecureTextEntry = true
     }
     
-    private let loginButton = UIButton().then {
+    private let loginButton = UIButton(type: .system).then {
         $0.backgroundColor = R.color.mainColor()
+        $0.setTitleColor(.white, for: .normal)
         $0.setTitle("로그인", for: .normal)
         $0.titleLabel?.font = .boldSystemFont(ofSize: 14)
         $0.layer.cornerRadius = 5
     }
     
-    private let signUpButton = UIButton().then {
-        $0.setTitleColor(.black, for: .normal)
-        $0.titleLabel?.font = .boldSystemFont(ofSize: 12)
+    private let signUpButton = UIButton(type: .system).then {
+        let grayButtonText = NSAttributedString(string: "아직 계정이 없으신가요?", attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: R.color.textColor2()! ])
+        let blackButtonText = NSAttributedString(string: " 간편 가입하기", attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.black ])
+        
+        let buttonTitle = NSMutableAttributedString(attributedString: grayButtonText)
+        buttonTitle.append(blackButtonText)
+        
+        $0.setAttributedTitle(buttonTitle, for: .normal)
     }
     
     override func viewDidLoad() {
@@ -75,12 +81,16 @@ class LogInViewController: UIViewController {
         pwTextField.underLine()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     private func setUpSubView() {
         [logo, titleLabel, idLabel, idTextField, pwLabel, pwTextField, loginButton, signUpButton].forEach({self.view.addSubview($0)})
         
         logo.snp.makeConstraints {
             $0.top.equalTo(143)
-            $0.leading.equalTo(64)
+            $0.leading.equalTo(55)
             $0.width.equalTo(30)
             $0.height.equalTo(30)
         }
@@ -92,30 +102,28 @@ class LogInViewController: UIViewController {
         
         idLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(42)
-            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.leading.equalTo(idTextField.snp.leading)
         }
         
         idTextField.snp.makeConstraints {
             $0.top.equalTo(idLabel.snp.bottom).offset(10)
-            $0.leading.equalTo(titleLabel.snp.leading)
-            $0.width.equalTo(220)
+            $0.width.equalTo(240)
             $0.centerX.equalToSuperview()
         }
         
         pwLabel.snp.makeConstraints {
             $0.top.equalTo(idTextField.snp.bottom).offset(50)
-            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.leading.equalTo(pwTextField.snp.leading)
         }
         
         pwTextField.snp.makeConstraints {
             $0.top.equalTo(pwLabel.snp.bottom).offset(10)
-            $0.leading.equalTo(titleLabel.snp.leading)
-            $0.width.equalTo(220)
+            $0.width.equalTo(240)
             $0.centerX.equalToSuperview()
         }
         
         loginButton.snp.makeConstraints {
-            $0.width.equalTo(220)
+            $0.width.equalTo(240)
             $0.height.equalTo(45)
             $0.centerX.equalToSuperview()
             $0.top.equalTo(pwTextField.snp.bottom).offset(50)
@@ -123,11 +131,9 @@ class LogInViewController: UIViewController {
         
         signUpButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(loginButton.snp.bottom).offset(30)
-            $0.width.equalTo(194)
-            $0.height.equalTo(20)
+            $0.top.equalTo(loginButton.snp.bottom).offset(10)
         }
         
     }
-
+    
 }
