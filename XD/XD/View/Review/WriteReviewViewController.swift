@@ -28,13 +28,14 @@ class WriteReviewViewController: UIViewController {
         $0.text = "회사 위치"
     }
     
-    private let locationButton = UIButton(type: .system).then {
+    let locationButton = UIButton(type: .system).then {
         $0.setTitle("   도로명주소를 입력해주세요.", for: .normal)
         $0.setTitleColor(.systemGray3, for: .normal)
         $0.contentHorizontalAlignment = .left
         $0.titleLabel?.font = .systemFont(ofSize: 12)
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
+        
     }
     
     private let jobLabel = UILabel().then {
@@ -49,12 +50,36 @@ class WriteReviewViewController: UIViewController {
         $0.text = "면접 분야"
     }
     
-    private let fieldDropDownButton = UIButton().then {
-        $0.setTitle("여기에 드롭다운", for: .normal)
+    private let fieldDropDownButton = UIButton(type: .system).then {
+        $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 12)
-        $0.titleLabel?.textColor = .lightGray
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
+    }
+    
+    private lazy var fieldDropDown = DropDown().then {
+        $0.dataSource = ["프론트엔드", "백엔드", "iOS", "안드로이드"]
+        
+        $0.anchorView = fieldDropDownButton
+        $0.bottomOffset = CGPoint(x: 0, y: ($0.anchorView?.plainView.bounds.height)!)
+        $0.width = fieldDropDownButton.bounds.width
+        
+        $0.textColor = .lightGray
+        $0.selectedTextColor = R.color.mainColor()!
+        $0.textFont = .systemFont(ofSize: 12, weight: .medium)
+        
+        $0.backgroundColor = .white
+        $0.selectionBackgroundColor = .white
+        
+        $0.cornerRadius = 10
+        $0.customCellConfiguration = { (_, _, cell) in
+            cell.optionLabel.textAlignment = .center
+        }
+        
+        $0.selectionAction = { [unowned self] (_: Int, item: String) in
+            fieldDropDownButton.setTitle(item, for: .normal)
+            fieldDropDownButton.titleLabel?.textColor = .black
+        }
     }
     
     private let levelLabel = UILabel().then {
@@ -78,7 +103,7 @@ class WriteReviewViewController: UIViewController {
     private let normalLevelLabel = UILabel().then {
         $0.text = "보통"
     }
-
+    
     private let hardLevelLabel = UILabel().then {
         $0.text = "어려움"
     }
@@ -97,7 +122,7 @@ class WriteReviewViewController: UIViewController {
     
     private let reviewTextView = UITextView().then {
         $0.text = "면접 후기를 한마디로 입력해주세요."
-        $0.layer.cornerRadius = 10
+        $0.basicTextViewStyle()
     }
     
     private let questionLabel = UILabel().then {
@@ -115,18 +140,37 @@ class WriteReviewViewController: UIViewController {
     }
     
     private let questionTextField = UITextField()
-
+    
+    private let questionTableView = UITableView().then {
+        $0.register(QuestionTableViewCell.self, forCellReuseIdentifier: QuestionTableViewCell.identifier)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = R.color.writeReviewBackgroundColor()
         setUpSubView()
         getScore()
+        showFieldDropdown()
+        showAddressVC()
     }
     
     private func getScore() {
         levelSlider.rx.value.subscribe(onNext: {
             self.scoreLabel.text = String(format: "%.1f", $0)
         }).disposed(by: disposedBag)
+    }
+    
+    private func showFieldDropdown() {
+        fieldDropDownButton.rx.tap.subscribe(onNext: { [unowned self] in
+            fieldDropDown.show()
+        }).disposed(by: disposedBag)
+    }
+    
+    private func showAddressVC() {
+        locationButton.rx.tap.bind { [unowned self] in
+            let nextVC = GetAddressViewController()
+            present(nextVC, animated: true)
+        }.disposed(by: disposedBag)
     }
     
     private func setUpSubView() {
@@ -270,6 +314,5 @@ class WriteReviewViewController: UIViewController {
             $0.height.equalTo(30)
             $0.centerX.equalToSuperview()
         }
-        
     }
 }
