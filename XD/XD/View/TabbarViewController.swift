@@ -34,7 +34,7 @@ extension TabbarViewController {
         mapNavigationController.tabBarItem.title = "지도"
         
         let searchNavigationController = UINavigationController()
-        let searchVC = WriteReviewViewController()
+        let searchVC = SearchViewController()
         searchNavigationController.addChild(searchVC)
         searchNavigationController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         searchNavigationController.tabBarItem.title = "검색"
